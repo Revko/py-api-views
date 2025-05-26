@@ -1,6 +1,7 @@
 from rest_framework import generics, viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 from .models import Actor, Genre, CinemaHall, Movie
 from .serializers import (
     ActorSerializer,
@@ -25,7 +26,7 @@ class GenreList(APIView):
 
 class GenreDetail(APIView):
     def get_object(self, pk):
-        return Genre.objects.get(pk=pk)
+        return get_object_or_404(Genre, pk=pk)
 
     def get(self, request, pk):
         genre = self.get_object(pk)
