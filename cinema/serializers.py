@@ -70,6 +70,11 @@ class MovieSerializer(serializers.Serializer):
         queryset=Genre.objects.all(),
         many=True
     )
+    cinema_halls = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=CinemaHall.objects.all(),
+        required=False
+    )
 
     def create(self, validated_data):
         actors = validated_data.pop("actors")
